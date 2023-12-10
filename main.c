@@ -2,23 +2,26 @@
 #include <stdlib.h>
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
+struct Book {
+	int number;
+	char title[10];
+};
+void main(void) {
+	struct Book *p;
 
-int main(int argc, char *argv[]) {
-	char *pc = NULL;
-	int i = 0;
+	p = (struct Book*)malloc(2 * sizeof(struct Book));
 	
-	pc = (char*)malloc(100*sizeof(char));
-	
-	if (pc == NULL) {
+	if (p == NULL) {
 		printf("메모리 할당 오류\n");
-		exit(1);
-	}
+		return;
+	} 
 	
-	for (i=0;i<26;i++) {
-		pc[i] = 'a'+i;
-	}
-	pc[i] = 0;
+	p->number = 1;
+	strcpy(p->title, "C Programming");
 	
-	printf("%s\n", pc);
-	free(pc);
-} 
+	(p+1)->number = 2;
+	strcpy((p+1)->title, "Electronics");
+	
+	free(p);
+	return;
+}
